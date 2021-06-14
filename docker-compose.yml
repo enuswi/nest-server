@@ -12,6 +12,22 @@ services:
     #command: 'yarn dev'
     depends_on:
       - db
+  cms:
+    tty: true
+    build:
+      context: ./cms
+    volumes:
+      - ./cms/:/usr/src/app
+    ports:
+      - 3002:3000
+  cms_server:
+    image: nginx:latest
+    ports:
+      - 8002:80
+    volumes:
+      - ./docker/nginx/conf:/etc/nginx/conf.d:ro
+      - ./cms/:/var/www/html
+    working_dir: /var/www/html
   db:
     image: postgres:11-alpine
     environment:

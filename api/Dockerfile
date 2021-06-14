@@ -1,4 +1,4 @@
-From node:14-alpine
+FROM node:14-alpine
 
 ENV API_ROOT /usr/src/app
 WORKDIR $API_ROOT
